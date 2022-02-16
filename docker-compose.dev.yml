@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  app:
+    container_name: dapper-crud
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - .:/usr/app
+    networks:
+      - annotations-app
+  db:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      - ACCEPT_EULA=y
+      - SA_PASSWORD=YourStrong-Passw0rd
+    ports:
+      - 1440:1433
+    networks:
+      - annotations-app
+
+networks:
+  annotations-app:
+    external: true
