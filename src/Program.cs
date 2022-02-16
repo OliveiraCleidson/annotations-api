@@ -1,7 +1,12 @@
+using AnnotationApp.Infra.Data;
+using AnnotationApp.Infra.Extensions.Dapper;
+using Dapper;
+using Domain.Entities;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+Dapper.SqlMapper.SetTypeMap(typeof(AnnotationModel), new ColumnAttributeTypeMapper<AnnotationModel>());
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
